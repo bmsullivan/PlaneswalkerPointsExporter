@@ -13,8 +13,8 @@
             // This is an achievement row, skip it
             if (badgeElm.innerHTML != '') continue;
             let date = row.getElementsByClassName('HistoryPanelHeaderLabel Date')[0].innerText;
-            let title = row.getElementsByClassName('HistoryPanelHeaderLabel Description')[0].innerText.replace(',', ' ');
-            let location = row.getElementsByClassName('HistoryPanelHeaderLabel Location')[0].innerText.replace(',', ' ');
+            let title = row.getElementsByClassName('HistoryPanelHeaderLabel Description')[0].innerText.replace(/,/g, '');
+            let location = row.getElementsByClassName('HistoryPanelHeaderLabel Location')[0].innerText.replace(/,/g, '');
             let lifetimePoints = row.getElementsByClassName('HistoryPanelHeaderLabel LifetimePoints')[0].innerText;
             let proPoints = row.getElementsByClassName('HistoryPanelHeaderLabel ProPoints')[0].innerText.replace('-', '');
 
@@ -27,9 +27,9 @@
             let eventMultiplier = eventDetailElm.getElementsByClassName('EventMultiplier')[0].childNodes[1].wholeText.trim();
             let players = eventDetailElm.getElementsByClassName('EventPlayers')[0].childNodes[1].wholeText.trim();
             let participationPoints = eventDetailElm.getElementsByClassName('EventParticipationPoints')[0].childNodes[1].wholeText.trim();
-            let format = eventDetailElm.getElementsByClassName('EventFormat')[0].childNodes[1].wholeText.trim();
-            let city = eventDetailElm.getElementsByClassName('EventLocation')[0].childNodes[1].wholeText.trim();
-            let place = eventDetailElm.getElementsByClassName('EventPlace')[0].childNodes[1].wholeText.trim();
+            let format = eventDetailElm.getElementsByClassName('EventFormat')[0].childNodes[1].wholeText.trim().replace(/,/g, '');
+            let city = eventDetailElm.getElementsByClassName('EventLocation')[0].childNodes[1].wholeText.trim().replace(/,/g, '');
+            let place = eventDetailElm.getElementsByClassName('EventPlace')[0].childNodes[1].wholeText.trim().replace(/,/g, '');
             let sactioningNumber = eventDetailElm.getElementsByClassName('EventSanctionNumber')[0].childNodes[1].wholeText.trim();
             let yearlyPoints = eventDetailElm.getElementsByClassName('MatchTotal')[0].childNodes[2].wholeText.trim();
 
@@ -38,7 +38,7 @@
                 let matchNumber = matchRowElm.getElementsByClassName('MatchPlace')[0].innerText;
                 let result = matchRowElm.getElementsByClassName('MatchResult')[0].innerText;
                 let matchPoints = matchRowElm.getElementsByClassName('MatchPoints')[0].innerText.replace('(+', '').replace(')', '');
-                let opponent = Array.from(matchRowElm.getElementsByClassName('TeamOpponent')).map(e => e.innerText).join(' | ');
+                let opponent = Array.from(matchRowElm.getElementsByClassName('TeamOpponent')).map(e => e.innerText).join(' | ').replace(/,/g, '');
                 let rowString = `${date},${title},${location},${matchIndex === 0 ? lifetimePoints : ''},${matchIndex === 0 ? yearlyPoints : ''},${matchIndex === 0 ? proPoints : ''},${eventMultiplier},${players},${matchIndex === 0 ? participationPoints : ''},${format},${city},${place},${sactioningNumber},${matchNumber},${result},${matchPoints},${opponent}\n`;
                 content += rowString;
                 matchIndex++;
