@@ -1,14 +1,17 @@
 {
     "name": "Planeswalker Points Exporter",
-    "version": "1.0",
+    "version": "1.1",
     "description": "Export your Planeswalker Points data as CSV",
     "manifest_version": 2,
+    "permissions": ["activeTab", "downloads"],
     "background": {
         "scripts": ["background.js"],
         "persistent": false
     },
-    "permissions": ["activeTab", "downloads"],
-    "browser_action": {
-        "default_popup": "popup.html"
-    }
+    "content_scripts": [
+        {
+            "matches": ["https://www.wizards.com/Magic/PlaneswalkerPoints/History"],
+            "js": ["downloadData.js"]
+        }
+    ]
   }
